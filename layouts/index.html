@@ -1,0 +1,12 @@
+{{ define "main" }}
+  {{ if .IsHome }}
+    {{ partial "hero-home.html" . }}
+{{ else }}
+  {{ partial "hero.html" . }}
+{{ end }}
+
+  {{ partial "services.html" . }}
+  {{ partial "case-studies.html" . }}
+  {{ partial "ai-breakout.html" . }}
+  {{ partial "contact.html" . }}
+{{ end }}

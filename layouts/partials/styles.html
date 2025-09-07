@@ -1,0 +1,2 @@
+{{ $css := resources.Get "css/main.css" | postCSS (dict "inlineImports" true) | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">

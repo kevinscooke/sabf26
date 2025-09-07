@@ -1,0 +1,40 @@
+{{ define "main" }}
+  {{ partial "hero.html" . }}
+
+  {{/* Optional: overview paragraphs */}}
+  {{ with .Params.overview.paragraphs }}
+  <section>
+    <div class="mx-auto max-w-7xl px-4 py-10">
+      <div class="prose max-w-3xl prose-gray">
+        {{ range . }}<p>{{ . }}</p>{{ end }}
+      </div>
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* Features/Benefits block if present */}}
+  {{ partial "features.html" . }}
+
+  {{ partial "process.html" . }}
+
+  {{ with .Params.case_study }}
+  <section class="border-t">
+    <div class="mx-auto max-w-7xl px-4 py-16">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900">Case Study</h2>
+      <div class="mt-6 rounded-2xl border bg-white p-6">
+        <p class="text-xs font-semibold tracking-wide text-gray-500 uppercase">{{ .client }}</p>
+        <h3 class="mt-1 text-xl font-semibold text-gray-900">{{ .title | default "Impact" }}</h3>
+        <ul class="mt-3 space-y-1 text-sm text-gray-700">
+          {{ with .challenge }}<li><span class="font-semibold">Challenge:</span> {{ . }}</li>{{ end }}
+          {{ with .solution }}<li><span class="font-semibold">Solution:</span> {{ . }}</li>{{ end }}
+          {{ with .result }}<li><span class="font-semibold">Result:</span> {{ . }}</li>{{ end }}
+        </ul>
+      </div>
+    </div>
+  </section>
+  {{ end }}
+
+  {{ if or .Params.contact_embed .Params.contact }}
+    {{ partial "contact.html" . }}
+  {{ end }}
+{{ end }}

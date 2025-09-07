@@ -1,0 +1,36 @@
+{{- $c := .Params.contact -}}
+{{- if $c }}
+<section id="{{ $c.id | default "contact" }}" class="border-t">
+  <div class="mx-auto max-w-3xl px-4 py-16">
+    <h2 class="text-3xl font-bold tracking-tight text-gray-900">{{ $c.heading | default "Let’s Talk" }}</h2>
+    {{ with $c.subheading }}<p class="mt-2 text-gray-600">{{ . }}</p>{{ end }}
+
+    <form method="post" action="{{ .Params.contact.form.action }}" class="mt-8 grid gap-4">
+      {{ range $c.form.fields }}
+        {{ $t := .type | default "text" }}
+        {{ if eq $t "select" }}
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-gray-700">{{ .label }}</span>
+            <select name="{{ .name }}" {{ if .required }}required{{ end }} class="w-full rounded-xl border px-3 py-2">
+              {{ range .options }}<option>{{ . }}</option>{{ end }}
+            </select>
+          </label>
+        {{ else if eq $t "textarea" }}
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-gray-700">{{ .label }}</span>
+            <textarea name="{{ .name }}" rows="5" {{ if .required }}required{{ end }} class="w-full rounded-xl border px-3 py-2"></textarea>
+          </label>
+        {{ else }}
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-gray-700">{{ .label }}</span>
+            <input type="{{ $t }}" name="{{ .name }}" {{ if .required }}required{{ end }} class="w-full rounded-xl border px-3 py-2">
+          </label>
+        {{ end }}
+      {{ end }}
+      <button type="submit" class="mt-2 inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-base font-semibold text-white hover:bg-gray-800">
+        {{ $c.form.submit_label | default "Send" }}
+      </button>
+    </form>
+  </div>
+</section>
+{{- end }}

@@ -1,0 +1,25 @@
+{{/* layouts/partials/seo.html */}}
+{{- $title := .Title | default site.Title -}}
+{{- $desc  := .Params.description | default site.Params.description | default site.Title -}}
+{{- $canon := .Permalink | default (printf "%s%s" site.BaseURL .RelPermalink) -}}
+
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}"/>
+
+<link rel="canonical" href="{{ $canon }}"/>
+
+<meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ $canon }}">
+{{ with .Params.images }}<meta property="og:image" content="{{ index . 0 }}">{{ end }}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc }}">
+{{ with .Params.images }}<meta name="twitter:image" content="{{ index . 0 }}">{{ end }}
+
+{{- /* Optional: noindex for drafts or private pages */ -}}
+{{- if or .Draft .Params.noindex -}}
+<meta name="robots" content="noindex, nofollow">
+{{- end -}}

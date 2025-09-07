@@ -1,0 +1,43 @@
+{{- $h := .Params.hero -}}
+{{- if $h }}
+<section class="relative overflow-hidden border-b bg-gradient-to-br from-gray-50 via-white to-gray-100">
+  <div class="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
+    <div class="grid gap-12 md:grid-cols-2 md:items-center">
+
+      <!-- Left: Hero copy -->
+      <div>
+        {{ with $h.eyebrow }}
+          <p class="text-sm font-semibold tracking-widest text-gray-500 uppercase">{{ . }}</p>
+        {{ end }}
+        <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-gray-900 md:text-6xl">
+          {{ $h.headline }}
+        </h1>
+        {{ with $h.subhead }}
+          <p class="mt-4 max-w-xl text-lg text-gray-600">{{ . }}</p>
+        {{ end }}
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          {{ with $h.primary_cta }}
+            <a href="{{ .href }}" class="inline-flex items-center rounded-xl px-5 py-3 text-base font-semibold bg-gray-900 text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400">
+              {{ .label }}
+            </a>
+          {{ end }}
+          {{ with $h.secondary_cta }}
+            <a href="{{ .href }}" class="inline-flex items-center rounded-xl px-5 py-3 text-base font-semibold bg-gray-100 text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300">
+              {{ .label }}
+            </a>
+          {{ end }}
+        </div>
+      </div>
+
+      <!-- Right: Compact Contact form embed -->
+        <div class="rounded-2xl border bg-white p-6 shadow-sm">
+        <h3 class="mb-4 text-xl font-semibold text-gray-900">Get Started</h3>
+        {{ partial "contact-hero.html" . }}
+        </div>
+
+
+    </div>
+  </div>
+</section>
+{{- end }}

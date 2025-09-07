@@ -1,0 +1,27 @@
+{{- if .Params.case_studies }}
+<section id="case-studies" class="border-t">
+  <div class="mx-auto max-w-7xl px-4 py-16">
+    <h2 class="text-3xl font-bold tracking-tight text-gray-900">{{ or .Params.case_studies_heading "What We’ve Delivered" }}</h2>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+      {{- range .Params.case_studies }}
+      <article class="overflow-hidden rounded-2xl border bg-white">
+        {{ with .image }}<img src="{{ . }}" alt="" class="h-48 w-full object-cover">{{ end }}
+        <div class="p-6">
+          <p class="text-xs font-semibold tracking-wide text-gray-500 uppercase">{{ .client }}</p>
+          <h3 class="mt-1 text-xl font-semibold text-gray-900">{{ .title }}</h3>
+          <ul class="mt-3 space-y-1 text-sm text-gray-600">
+            {{ with .challenge }}<li><span class="font-semibold text-gray-800">Challenge:</span> {{ . }}</li>{{ end }}
+            {{ with .solution }}<li><span class="font-semibold text-gray-800">Solution:</span> {{ . }}</li>{{ end }}
+            {{ with .result }}<li><span class="font-semibold text-gray-800">Result:</span> {{ . }}</li>{{ end }}
+          </ul>
+          {{ with .href }}
+            <a href="{{ . }}" class="mt-4 inline-flex text-sm font-semibold text-gray-900 hover:underline">Discuss a similar project →</a>
+          {{ end }}
+        </div>
+      </article>
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{- end }}

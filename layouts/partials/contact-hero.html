@@ -1,0 +1,32 @@
+{{/* Compact hero contact form */}}
+{{- $c := .Params.contact -}}
+<section id="contact-hero">
+  <form method="post" action="{{ .Params.contact.form.action }}" class="grid gap-4">
+    <!-- Name -->
+    <label class="block">
+      <span class="mb-1 block text-sm font-medium text-gray-700">Name*</span>
+      <input type="text" name="name" required
+             class="w-full rounded-xl border px-3 py-2">
+    </label>
+
+    <!-- Email -->
+    <label class="block">
+      <span class="mb-1 block text-sm font-medium text-gray-700">Email*</span>
+      <input type="email" name="email" required
+             class="w-full rounded-xl border px-3 py-2">
+    </label>
+
+    <!-- Message -->
+    <label class="block">
+      <span class="mb-1 block text-sm font-medium text-gray-700">What are you trying to achieve?</span>
+      <textarea name="message" rows="3" required
+                class="w-full rounded-xl border px-3 py-2"></textarea>
+    </label>
+
+    <!-- Submit -->
+    <button type="submit"
+      class="mt-2 inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-base font-semibold text-white hover:bg-gray-800">
+      Start Project
+    </button>
+  </form>
+</section>

@@ -1,0 +1,57 @@
+<header class="sticky top-0 z-50 border-b bg-white/95 backdrop-blur supports-backdrop-blur:bg-white/80">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
+    <!-- Logo -->
+    <a href="{{ .Site.BaseURL }}" class="flex items-center gap-2">
+      <span class="text-xl font-extrabold tracking-tight text-gray-900">
+        {{ .Site.Title }}
+      </span>
+    </a>
+
+    <!-- Nav -->
+    <nav class="hidden space-x-8 md:flex">
+      <a href="/" class="text-sm font-semibold text-gray-700 hover:text-gray-900">Home</a>
+      <a href="/services/ecommerce/" class="text-sm font-semibold text-gray-700 hover:text-gray-900">eCommerce</a>
+      <a href="/services/static-sites/" class="text-sm font-semibold text-gray-700 hover:text-gray-900">Static</a>
+      <a href="/services/wordpress/" class="text-sm font-semibold text-gray-700 hover:text-gray-900">WordPress</a>
+      <a href="/services/ai/" class="text-sm font-semibold text-gray-700 hover:text-gray-900">AI Concierge</a>
+      <a href="/#contact" class="text-sm font-semibold text-gray-700 hover:text-gray-900">Contact</a>
+    </nav>
+
+    <!-- CTA -->
+    <div class="hidden md:block">
+      <a href="/#contact" class="rounded-xl bg-gray-900 px-4 py-2 text-sm font-semibold text-white hover:bg-gray-800">
+        Start Project
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-button" class="md:hidden rounded-lg p-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300">
+      <svg class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden border-t bg-white md:hidden">
+    <nav class="space-y-1 px-4 py-4">
+      <a href="/" class="block text-sm font-semibold text-gray-700 hover:text-gray-900">Home</a>
+      <a href="/services/ecommerce/" class="block text-sm font-semibold text-gray-700 hover:text-gray-900">eCommerce</a>
+      <a href="/services/static-sites/" class="block text-sm font-semibold text-gray-700 hover:text-gray-900">Static</a>
+      <a href="/services/wordpress/" class="block text-sm font-semibold text-gray-700 hover:text-gray-900">WordPress</a>
+      <a href="/services/ai/" class="block text-sm font-semibold text-gray-700 hover:text-gray-900">AI Concierge</a>
+      <a href="/#contact" class="block text-sm font-semibold text-gray-700 hover:text-gray-900">Contact</a>
+    </nav>
+  </div>
+
+  <script>
+    const btn = document.getElementById("mobile-menu-button");
+    const menu = document.getElementById("mobile-menu");
+    if (btn) {
+      btn.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+      });
+    }
+  </script>
+</header>
