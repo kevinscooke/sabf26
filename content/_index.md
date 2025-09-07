@@ -1,11 +1,11 @@
 ---
-title: "Search And Be Found"
+title: "Search & Be Found - SEO, Websites, AI"
 description: "Be found faster. Grow faster. SEO-first websites and eCommerce that turn search into sales—with an invite-only AI concierge for leaders who want an edge."
 # HERO
 hero:
   eyebrow: "Built on SEO. Driven by Results."
   headline: "Be Found. Be Chosen. Be Profitable."
-  subhead: "From search to sales, we make sure your business gets discovered faster—and wins more customers."
+  subhead: "From search to sales, we make sure your business gets discovered faster—and wins more customers. Our work blends proven SEO strategies with high-performance websites and scalable eCommerce solutions. The result is measurable growth and a stronger digital presence that turns visibility into profit.”"
   primary_cta:
     label: "Start Your Project"
     href: "#contact"
