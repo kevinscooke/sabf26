@@ -60,7 +60,7 @@ case_studies:
 # AI BREAKOUT (premium)
 ai_breakout:
   eyebrow: "Go Beyond SEO"
-  headline: "AI Concierge for Operators"
+  headline: "AI Concierge for Business Operations"
   copy: "For a select few, we integrate AI into your daily flow—coaching, automations, and decision support that compounds output."
   cta:
     label: "Request Invite"
