@@ -3,8 +3,10 @@
 <head>
   {{ partial "seo.html" . }}
   {{ partial "styles.html" . }}
+   {{ partial "analytics/head.html" . }}
 </head>
 <body class="flex min-h-screen flex-col">
+  {{ partial "analytics/body.html" . }}  {{/* GTM noscript only; safe for gtag */}}
   {{ partial "header.html" . }}
 
   <main class="flex-1">
@@ -12,5 +14,6 @@
   </main>
 
   {{ partial "footer.html" . }}
+  {{ partial "analytics/events.html" . }} {{/* shared event helpers */}}
 </body>
 </html>

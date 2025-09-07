@@ -1,0 +1,46 @@
+<script>
+(function () {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+
+  function fire(name, params){
+    if (typeof gtag === 'function') {
+      gtag('event', name, params || {});
+    } else if (window.dataLayer) {
+      window.dataLayer.push(Object.assign({ event: name }, params || {}));
+    }
+  }
+
+  function init(){
+    // Track clicks to /contact/ CTAs
+    document.querySelectorAll('a[href="/contact/"], a[href="/contact"]').forEach(a => {
+      a.addEventListener('click', () => {
+        const loc = a.dataset.cta || a.getAttribute('data-cta') || guessLocation(a);
+        fire('contact_cta_click', { location: loc });
+      });
+    });
+
+    // Track form submit on contact form
+    const form = document.querySelector('form[name="contact"]');
+    if (form) {
+      form.addEventListener('submit', () => {
+        const variantEl = document.querySelector('[data-form-variant]');
+        fire('contact_form_submit', {
+          form_variant: variantEl ? variantEl.dataset.formVariant : 'default'
+        });
+      });
+    }
+  }
+
+  function guessLocation(el){
+    // naive helper to label where the CTA lives
+    const c = el.closest('header, footer, section, nav');
+    if (!c) return 'unknown';
+    if (c.tagName === 'HEADER' || c.className.match(/header|nav/i)) return 'header';
+    if (c.tagName === 'FOOTER' || c.className.match(/footer/i)) return 'footer';
+    if (c.className.match(/hero/i)) return 'hero';
+    return 'section';
+  }
+})();
+</script>

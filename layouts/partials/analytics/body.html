@@ -1,0 +1,7 @@
+{{ $p := .Site.Params.analytics }}
+{{ if and (not .Site.IsServer) (eq $p.provider "gtm") $p.gtm_id }}
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id={{ $p.gtm_id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+{{ end }}

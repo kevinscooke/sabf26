@@ -2,3 +2,8 @@ baseURL = 'https://searchandbefound.com/'
 languageCode = 'en-us'
 title = 'Search & Be Found'
 enableRobotsTXT = true
+
+[params.analytics]
+provider = "gtag"          # "gtag" or "gtm"
+ga4_id   = "G-SLQRLZHTL5"  # your GA4 ID
+gtm_id   = ""              # e.g., "GTM-XXXXXXX" (leave blank for now)
