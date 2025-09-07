@@ -1,0 +1,13 @@
+# Hugo
+/public/
+/resources/_gen/
+/hugo_stats.json
+
+# Node
+node_modules/
+.npm-cache/
+
+# Mac/Editor
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,52 @@
+# Root build settings
+[build]
+  # If you’re using Hugo Pipes with PostCSS (recommended)
+  command = "hugo --gc --minify"
+  publish = "public"
+
+  # If your Tailwind build is a separate step (Tailwind CLI),
+  # use this instead and keep the publish path the same:
+  # command = "npm run build"
+
+[build.environment]
+  # Pick a known-good Hugo Extended version (or your exact local version).
+  # Must be Extended for PostCSS/Tailwind to work via Hugo Pipes.
+  HUGO_VERSION = "0.127.0"
+  HUGO_ENABLEGITINFO = "true"
+  NODE_VERSION = "20"        # Ensure PostCSS/Tailwind runs on Node 20+
+  # Set production env for Hugo
+  HUGO_ENV = "production"
+
+# Redirects (optional; handy for /admin, old slugs, etc.)
+[[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301
+  force = true
+
+# Cache headers for static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Security & basic hardening
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# Context-specific overrides (optional)
+[context.production]
+  command = "hugo --gc --minify"
+
+[context.deploy-preview]
+  # Set baseURL automatically on previews so absolute links work
+  command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
+
+[context.branch-deploy]
+  command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
