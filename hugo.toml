@@ -1,9 +1,19 @@
 baseURL = 'https://searchandbefound.com/'
+canonifyURLs = true # ensures all URLs are absolute
 languageCode = 'en-us'
 title = 'Search & Be Found'
 enableRobotsTXT = true
+enableGitInfo = true # for "lastmod" in RSS feed
 
 [params.analytics]
 provider = "gtag"          # "gtag" or "gtm"
 ga4_id   = "G-SLQRLZHTL5"  # your GA4 ID
 gtm_id   = ""              # e.g., "GTM-XXXXXXX" (leave blank for now)
+
+[outputs]
+home = ["HTML","JSON","RSS"]
+
+[sitemap]
+  changefreq = "weekly"
+  filename   = "sitemap.xml"
+  priority   = 0.5

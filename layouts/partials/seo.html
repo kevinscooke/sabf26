@@ -23,3 +23,59 @@
 {{- if or .Draft .Params.noindex -}}
 <meta name="robots" content="noindex, nofollow">
 {{- end -}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "MarketingAgency"],
+  "@id": "https://searchandbefound.com/#organization",
+  "name": "Search And Be Found",
+  "url": "https://searchandbefound.com/",
+  "telephone": "+1-828-399-0447",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1515 Mockingbird Ln STE 400",
+    "addressLocality": "Charlotte",
+    "addressRegion": "NC",
+    "postalCode": "28209",
+    "addressCountry": "US"
+  },
+  "areaServed": [
+    "Charlotte, NC",
+    "Huntersville, NC"
+    "Concord, NC",
+    "Greensboro, NC",
+    "Winston-Salem, NC",
+    "Mount Airy, NC",
+    "Elkin, NC",
+    "United States"
+  ],
+  "knowsAbout": [
+    "Marketing",
+    "lead generation",
+    "consulting",
+    "SEO",
+    "websites",
+    "Magento",
+    "Hugo",
+    "AI"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://searchandbefound.com/#website",
+  "url": "https://searchandbefound.com/",
+  "name": "Search And Be Found",
+  "inLanguage": "en-US",
+  "publisher": { "@id": "https://searchandbefound.com/#organization" },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://searchandbefound.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
