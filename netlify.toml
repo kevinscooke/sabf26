@@ -11,7 +11,7 @@
 [build.environment]
   # Pick a known-good Hugo Extended version (or your exact local version).
   # Must be Extended for PostCSS/Tailwind to work via Hugo Pipes.
-  HUGO_VERSION = "0.127.0"
+  HUGO_VERSION = "0.148.2"
   HUGO_ENABLEGITINFO = "true"
   NODE_VERSION = "20"        # Ensure PostCSS/Tailwind runs on Node 20+
   # Set production env for Hugo
