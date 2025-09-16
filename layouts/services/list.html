@@ -1,7 +1,8 @@
 {{ define "main" }}
+  {{/* HERO */}}
   {{ partial "hero.html" . }}
 
-  {{/* Optional: overview paragraphs */}}
+  {{/* OVERVIEW PARAGRAPHS */}}
   {{ with .Params.overview.paragraphs }}
   <section>
     <div class="mx-auto max-w-7xl px-4 py-10">
@@ -12,18 +13,160 @@
   </section>
   {{ end }}
 
-  {{/* Features/Benefits block if present */}}
+  {{/* FEATURES / BENEFITS (existing partial) */}}
   {{ partial "features.html" . }}
 
-  {{ partial "process.html" . }}
+  {{/* OUTCOMES (bulleted results) */}}
+  {{ with .Params.outcomes }}
+  <section class="border-t">
+    <div class="mx-auto max-w-7xl px-4 py-14">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900">Outcomes</h2>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-gray-700">
+        {{ range . }}
+          <li class="flex items-start gap-2">
+            <span class="mt-2 inline-block h-2.5 w-2.5 rounded-full bg-gray-900"></span>
+            <span>{{ . }}</span>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  </section>
+  {{ end }}
 
+  {{/* OWNER MENU (popular requests) */}}
+  {{ with .Params.owner_menu }}
+  <section class="border-t">
+    <div class="mx-auto max-w-7xl px-4 py-14">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900">{{ .title | default "Popular Requests" }}</h2>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-gray-700">
+        {{ range .items }}
+          <li class="rounded-xl border bg-white p-4">{{ . }}</li>
+        {{ end }}
+      </ul>
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* M1 -> M2 CONVERSIONS */}}
+  {{ with .Params.m1_to_m2 }}
+  <section class="border-t">
+    <div class="mx-auto max-w-7xl px-4 py-14">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900">{{ .title | default "M1 → M2 Conversions" }}</h2>
+      <ul class="mt-6 space-y-2 text-gray-700">
+        {{ range .bullets }}
+          <li class="flex gap-2">
+            <span class="mt-2 h-1.5 w-4 rounded bg-gray-900"></span>
+            <span>{{ . }}</span>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* OPEN SOURCE NOTE */}}
+  {{ with .Params.open_source }}
+  <section class="border-t">
+    <div class="mx-auto max-w-7xl px-4 py-14">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900">{{ .title | default "Magento Open Source (Community Edition)" }}</h2>
+      <p class="mt-4 max-w-3xl text-gray-700">{{ .text }}</p>
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* CUSTOM MODULES */}}
+  {{ with .Params.modules }}
+  <section class="border-t">
+    <div class="mx-auto max-w-7xl px-4 py-14">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900">{{ .title | default "Custom Modules" }}</h2>
+      <ul class="mt-6 space-y-2 text-gray-700">
+        {{ range .points }}
+          <li class="flex gap-2">
+            <span class="mt-2 h-1.5 w-4 rounded bg-gray-900"></span>
+            <span>{{ . }}</span>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* PERFORMANCE & RELIABILITY */}}
+  {{ with .Params.performance }}
+  <section class="border-t">
+    <div class="mx-auto max-w-7xl px-4 py-14">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900">{{ .title | default "Performance & Reliability" }}</h2>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2 text-gray-700">
+        {{ range .checklist }}
+          <li class="rounded-xl border bg-white p-4">{{ . }}</li>
+        {{ end }}
+      </ul>
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* SEO HYGIENE */}}
+  {{ with .Params.seo }}
+  <section class="border-t">
+    <div class="mx-auto max-w-7xl px-4 py-14">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900">{{ .title | default "Built-In SEO Hygiene" }}</h2>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2 text-gray-700">
+        {{ range .bullets }}
+          <li class="rounded-xl border bg-white p-4">{{ . }}</li>
+        {{ end }}
+      </ul>
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* INTEGRATIONS */}}
+  {{ with .Params.integrations }}
+  <section class="border-t">
+    <div class="mx-auto max-w-7xl px-4 py-14">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900">{{ .title | default "Payments, Shipping & Ops" }}</h2>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-gray-700">
+        {{ range .list }}
+          <li class="rounded-xl border bg-white p-4">{{ . }}</li>
+        {{ end }}
+      </ul>
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* PROCESS (existing partial or inline block) */}}
+  {{ if .Params.process }}
+    {{/* If you already have a partial for process, keep it: */}}
+    {{ partial "process.html" . }}
+  {{ end }}
+
+  {{/* FAQ */}}
+  {{ with .Params.faq }}
+  <section class="border-t">
+    <div class="mx-auto max-w-7xl px-4 py-14">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900">{{ .title | default "FAQs" }}</h2>
+      <div class="mt-6 divide-y rounded-2xl border bg-white">
+        {{ range .items }}
+        <details class="group p-6">
+          <summary class="cursor-pointer list-none text-lg font-semibold text-gray-900">
+            {{ .q }}
+          </summary>
+          <div class="pt-2 text-gray-700">{{ .a }}</div>
+        </details>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* CASE STUDY (existing block if you have it) */}}
   {{ with .Params.case_study }}
   <section class="border-t">
-    <div class="mx-auto max-w-7xl px-4 py-16">
+    <div class="mx-auto max-w-7xl px-4 py-14">
       <h2 class="text-3xl font-bold tracking-tight text-gray-900">Case Study</h2>
       <div class="mt-6 rounded-2xl border bg-white p-6">
-        <p class="text-xs font-semibold tracking-wide text-gray-500 uppercase">{{ .client }}</p>
-        <h3 class="mt-1 text-xl font-semibold text-gray-900">{{ .title | default "Impact" }}</h3>
+        <div class="flex flex-col gap-1">
+          {{ with .client }}<div class="text-base font-semibold text-gray-900">{{ . }}</div>{{ end }}
+        </div>
         <ul class="mt-3 space-y-1 text-sm text-gray-700">
           {{ with .challenge }}<li><span class="font-semibold">Challenge:</span> {{ . }}</li>{{ end }}
           {{ with .solution }}<li><span class="font-semibold">Solution:</span> {{ . }}</li>{{ end }}
@@ -34,7 +177,13 @@
   </section>
   {{ end }}
 
+  {{/* CONTACT */}}
   {{ if or .Params.contact_embed .Params.contact }}
     {{ partial "contact.html" . }}
+  {{ end }}
+
+  {{/* PAGE-SPECIFIC JSON-LD */}}
+  {{ with .Params.schema_jsonld }}
+    {{ . | safeHTML }}
   {{ end }}
 {{ end }}

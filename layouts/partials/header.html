@@ -1,32 +1,60 @@
+<!-- Updated header.html with robust Websites dropdown behavior -->
 <header class="sticky top-0 z-50 border-b bg-white/95 backdrop-blur supports-backdrop-blur:bg-white/80">
   <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
     <!-- Logo -->
-    <a href="{{ .Site.BaseURL }}" class="flex items-center gap-2">
+    <a href="{{ .Site.BaseURL }}" class="flex items-center gap-2" aria-label="{{ .Site.Title }} home">
       <span class="text-xl font-extrabold tracking-tight text-gray-900">
         {{ .Site.Title }}
       </span>
     </a>
 
-    <!-- Nav -->
-    <nav class="hidden space-x-8 md:flex">
-      <a href="/" class="text-sm font-semibold text-gray-700 hover:text-gray-900">Home</a>
-      <a href="/services/ecommerce/" class="text-sm font-semibold text-gray-700 hover:text-gray-900">eCommerce</a>
-      <a href="/services/static-sites/" class="text-sm font-semibold text-gray-700 hover:text-gray-900">Static</a>
-      <a href="/services/wordpress/" class="text-sm font-semibold text-gray-700 hover:text-gray-900">WordPress</a>
-      <a href="/services/ai/" class="text-sm font-semibold text-gray-700 hover:text-gray-900">AI Concierge</a>
-      <a href="/contact/" class="text-sm font-semibold text-gray-700 hover:text-gray-900">Contact</a>
+    <!-- Desktop Nav -->
+    <nav class="hidden items-center space-x-8 md:flex">
+      <a href="/services/seo/" class="text-sm font-semibold text-gray-700 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300">SEO</a>
+
+      <!-- Websites dropdown -->
+      <div class="relative" data-dropdown="websites">
+        <button
+          type="button"
+          class="inline-flex items-center gap-1 text-sm font-semibold text-gray-700 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="websites-menu"
+        >
+          Websites
+          <svg class="h-4 w-4 transition-transform duration-150" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+          </svg>
+        </button>
+        <!-- Menu -->
+        <div
+          id="websites-menu"
+          class="invisible absolute left-0 top-full mt-2 w-56 translate-y-1 rounded-xl border bg-white p-2 opacity-0 shadow-lg transition duration-150 ease-out pointer-events-none z-50"
+          role="menu"
+          aria-label="Websites"
+        >
+          <a href="/services/magento/" class="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300" role="menuitem">Magento</a>
+          <a href="/services/static-sites/" class="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300" role="menuitem">Static</a>
+          <a href="/services/ecommerce/" class="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300" role="menuitem">eCommerce</a>
+          <a href="/services/wordpress/" class="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300" role="menuitem">WordPress</a>
+        </div>
+      </div>
+
+      <a href="/services/ai/" class="text-sm font-semibold text-gray-700 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300">AI Concierge</a>
+      <a href="/blog/" class="text-sm font-semibold text-gray-700 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300">Blog</a>
+      <a href="/contact/" class="text-sm font-semibold text-gray-700 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300">Contact</a>
     </nav>
 
     <!-- CTA -->
     <div class="hidden md:block">
-      <a href="/contact/" class="rounded-xl bg-gray-900 px-4 py-2 text-sm font-semibold text-white hover:bg-gray-800">
+      <a href="/contact/" class="rounded-xl bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400">
         Start Project
       </a>
     </div>
 
     <!-- Mobile Menu Button -->
-    <button id="mobile-menu-button" class="md:hidden rounded-lg p-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300">
-      <svg class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <button id="mobile-menu-button" class="md:hidden rounded-lg p-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300" aria-controls="mobile-menu" aria-expanded="false">
+      <svg class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M4 6h16M4 12h16M4 18h16" />
       </svg>
@@ -35,22 +63,167 @@
 
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="hidden border-t bg-white md:hidden">
-    <nav class="space-y-1 px-4 py-4">
-      <a href="/" class="block text-sm font-semibold text-gray-700 hover:text-gray-900">Home</a>
-      <a href="/services/ecommerce/" class="block text-sm font-semibold text-gray-700 hover:text-gray-900">eCommerce</a>
-      <a href="/services/static-sites/" class="block text-sm font-semibold text-gray-700 hover:text-gray-900">Static</a>
-      <a href="/services/wordpress/" class="block text-sm font-semibold text-gray-700 hover:text-gray-900">WordPress</a>
-      <a href="/services/ai/" class="block text-sm font-semibold text-gray-700 hover:text-gray-900">AI Concierge</a>
-      <a href="/contact/" class="block text-sm font-semibold text-gray-700 hover:text-gray-900">Contact</a>
+    <nav class="px-4 py-4">
+      <ul class="space-y-1">
+        <li><a href="/services/seo/" class="block text-sm font-semibold text-gray-700 hover:text-gray-900">SEO</a></li>
+
+        <!-- Mobile: Websites accordion -->
+        <li class="border-y">
+          <button
+            id="mobile-websites-toggle"
+            class="flex w-full items-center justify-between py-3 text-left text-sm font-semibold text-gray-700 hover:text-gray-900"
+            aria-controls="mobile-websites-menu"
+            aria-expanded="false"
+          >
+            <span>Websites</span>
+            <svg class="h-4 w-4 transition" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+          <ul id="mobile-websites-menu" class="hidden space-y-1 pb-3 pl-3">
+            <li><a href="/services/magento/" class="block text-sm font-medium text-gray-700 hover:text-gray-900">Magento</a></li>
+            <li><a href="/services/static-sites/" class="block text-sm font-medium text-gray-700 hover:text-gray-900">Static</a></li>
+            <li><a href="/services/ecommerce/" class="block text-sm font-medium text-gray-700 hover:text-gray-900">eCommerce</a></li>
+            <li><a href="/services/wordpress/" class="block text-sm font-medium text-gray-700 hover:text-gray-900">WordPress</a></li>
+          </ul>
+        </li>
+
+        <li><a href="/services/ai/" class="block py-3 text-sm font-semibold text-gray-700 hover:text-gray-900">AI Concierge</a></li>
+        <li><a href="/blog/" class="block py-3 text-sm font-semibold text-gray-700 hover:text-gray-900">Blog</a></li>
+        <li><a href="/contact/" class="block py-3 text-sm font-semibold text-gray-700 hover:text-gray-900">Contact</a></li>
+      </ul>
     </nav>
   </div>
 
   <script>
-    const btn = document.getElementById("mobile-menu-button");
-    const menu = document.getElementById("mobile-menu");
-    if (btn) {
-      btn.addEventListener("click", () => {
-        menu.classList.toggle("hidden");
+    // ---------- Utilities ----------
+    function closeAllDropdowns(exceptEl) {
+      document.querySelectorAll('[data-dropdown]').forEach(dd => {
+        if (dd !== exceptEl) {
+          dd.classList.remove('is-open');
+          const menu = dd.querySelector('[role="menu"]');
+          const btn = dd.querySelector('button[aria-haspopup="true"]');
+          if (menu && btn) {
+            menu.classList.add('invisible','opacity-0','translate-y-1','pointer-events-none');
+            btn.setAttribute('aria-expanded','false');
+            const icon = btn.querySelector('svg');
+            if (icon) icon.style.transform = 'rotate(0deg)';
+          }
+        }
+      });
+    }
+    function openDropdown(dd) {
+      dd.classList.add('is-open');
+      const menu = dd.querySelector('[role="menu"]');
+      const btn = dd.querySelector('button[aria-haspopup="true"]');
+      if (menu && btn) {
+        menu.classList.remove('invisible','opacity-0','translate-y-1','pointer-events-none');
+        btn.setAttribute('aria-expanded','true');
+        const icon = btn.querySelector('svg');
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      }
+    }
+    function closeDropdown(dd) {
+      dd.classList.remove('is-open');
+      const menu = dd.querySelector('[role="menu"]');
+      const btn = dd.querySelector('button[aria-haspopup="true"]');
+      if (menu && btn) {
+        menu.classList.add('invisible','opacity-0','translate-y-1','pointer-events-none');
+        btn.setAttribute('aria-expanded','false');
+        const icon = btn.querySelector('svg');
+        if (icon) icon.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    // ---------- Desktop dropdown (hover + click with small delay) ----------
+    document.querySelectorAll('[data-dropdown]').forEach(dd => {
+      const btn = dd.querySelector('button[aria-haspopup="true"]');
+      const menu = dd.querySelector('[role="menu"]');
+      let enterTimer = null;
+      let leaveTimer = null;
+
+      // Open on click (helps Chrome pointer quirks)
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const isOpen = dd.classList.contains('is-open');
+        if (isOpen) {
+          closeDropdown(dd);
+        } else {
+          closeAllDropdowns(dd);
+          openDropdown(dd);
+        }
+      });
+
+      // Hover intent
+      dd.addEventListener('mouseenter', () => {
+        clearTimeout(leaveTimer);
+        enterTimer = setTimeout(() => {
+          closeAllDropdowns(dd);
+          openDropdown(dd);
+        }, 80); // tiny delay to avoid accidental opens
+      });
+      dd.addEventListener('mouseleave', () => {
+        clearTimeout(enterTimer);
+        leaveTimer = setTimeout(() => closeDropdown(dd), 120); // grace period to traverse into menu
+      });
+
+      // Keep open when moving between button and menu
+      menu.addEventListener('mouseenter', () => clearTimeout(leaveTimer));
+      menu.addEventListener('mouseleave', () => {
+        leaveTimer = setTimeout(() => closeDropdown(dd), 120);
+      });
+
+      // Keyboard accessibility
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          closeAllDropdowns(dd);
+          openDropdown(dd);
+          const firstItem = menu.querySelector('a,button,[tabindex]:not([tabindex="-1"])');
+          if (firstItem) firstItem.focus();
+        }
+        if (e.key === 'Escape') {
+          closeDropdown(dd);
+          btn.focus();
+        }
+      });
+      menu.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closeDropdown(dd);
+          btn.focus();
+        }
+      });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      const anyOpen = document.querySelector('[data-dropdown].is-open');
+      if (anyOpen && !anyOpen.contains(e.target)) {
+        closeDropdown(anyOpen);
+      }
+    });
+
+    // Mobile main menu
+    const btnMobile = document.getElementById("mobile-menu-button");
+    const menuMobile = document.getElementById("mobile-menu");
+    if (btnMobile && menuMobile) {
+      btnMobile.addEventListener("click", () => {
+        const isHidden = menuMobile.classList.toggle("hidden");
+        btnMobile.setAttribute("aria-expanded", String(!isHidden));
+      });
+    }
+
+    // Mobile "Websites" accordion
+    const subToggle = document.getElementById("mobile-websites-toggle");
+    const subMenu = document.getElementById("mobile-websites-menu");
+    if (subToggle && subMenu) {
+      subToggle.addEventListener("click", () => {
+        const isHidden = subMenu.classList.toggle("hidden");
+        subToggle.setAttribute("aria-expanded", String(!isHidden));
+        const icon = subToggle.querySelector("svg");
+        if (icon) icon.style.transform = isHidden ? "rotate(0deg)" : "rotate(180deg)";
       });
     }
   </script>

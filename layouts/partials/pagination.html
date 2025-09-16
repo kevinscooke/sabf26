@@ -1,0 +1,29 @@
+{{/* Tailwind-styled pagination for list pages */}}
+{{ $p := .Paginator }}
+{{ if and $p (gt $p.TotalPages 1) }}
+<nav class="mt-10 flex items-center justify-center">
+  <ul class="inline-flex items-center gap-2 text-sm">
+    {{ if $p.HasPrev }}
+      <li>
+        <a href="{{ $p.Prev.URL }}" class="rounded-lg border px-3 py-2 hover:bg-gray-50">← Prev</a>
+      </li>
+    {{ end }}
+
+    {{ range $p.Pagers }}
+      <li>
+        {{ if eq . $p }}
+          <span class="rounded-lg border px-3 py-2 bg-gray-100 font-semibold">{{ .PageNumber }}</span>
+        {{ else }}
+          <a href="{{ .URL }}" class="rounded-lg border px-3 py-2 hover:bg-gray-50">{{ .PageNumber }}</a>
+        {{ end }}
+      </li>
+    {{ end }}
+
+    {{ if $p.HasNext }}
+      <li>
+        <a href="{{ $p.Next.URL }}" class="rounded-lg border px-3 py-2 hover:bg-gray-50">Next →</a>
+      </li>
+    {{ end }}
+  </ul>
+</nav>
+{{ end }}

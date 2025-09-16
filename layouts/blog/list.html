@@ -1,0 +1,102 @@
+{{ define "main" }}
+<section class="mx-auto max-w-6xl px-4 py-10">
+  <!-- Title + intro (from blog/_index.md if present) -->
+  <h1 class="text-4xl font-bold tracking-tight">
+    {{ if .Title }}{{ .Title }}{{ else }}Blog & Playbooks{{ end }}
+  </h1>
+  <p class="mt-2 text-gray-600">
+    {{ with .Description }}
+      {{ . }}
+    {{ else }}
+      SEO-first websites, AI-powered lead generation, and eCommerce growth. Practical guides, case studies, and templates from Search And Be Found.
+    {{ end }}
+  </p>
+
+  <!-- Posts grid -->
+  {{ $p := .Paginate (.Pages.ByDate.Reverse) }}
+  {{ if gt (len $p.Pages) 0 }}
+    <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {{ range $p.Pages }}
+        <article class="group flex flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition hover:shadow-md">
+          <a href="{{ .RelPermalink }}" class="block">
+            {{/* Resolve a cover image from several common params */}}
+            {{ $img := "" }}
+            {{ with .Params.cover }}{{ $img = . }}{{ else }}
+              {{ with .Params.featured_image }}{{ $img = . }}{{ else }}
+                {{ with .Params.hero }}{{ $img = . }}{{ else }}
+                  {{ with .Params.images }}{{ $img = index . 0 }}{{ end }}
+                {{ end }}
+              {{ end }}
+            {{ end }}
+
+            {{ if $img }}
+              <div class="aspect-[16/9] w-full overflow-hidden bg-gray-100">
+                <img src="{{ $img | relURL }}"
+                     alt="{{ .Title }} cover"
+                     class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                     loading="lazy" decoding="async">
+              </div>
+            {{ else }}
+              <!-- Fallback thumbnail -->
+              <div class="aspect-[16/9] w-full bg-gradient-to-br from-gray-100 to-gray-200"></div>
+            {{ end }}
+
+            <div class="p-5">
+              <h2 class="text-xl font-semibold group-hover:underline">{{ .Title }}</h2>
+              <div class="mt-1 text-sm text-gray-500">
+                <time datetime="{{ .Date }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                <span aria-hidden="true"> • </span>{{ .ReadingTime }} min read
+              </div>
+
+              <p class="mt-3 text-gray-700">
+                {{ with .Params.summary }}
+                  {{ . }}
+                {{ else }}
+                  {{ with .Summary }}
+                    {{ . | plainify | truncate 160 }}
+                  {{ else }}
+                    {{ .Plain | truncate 160 }}
+                  {{ end }}
+                {{ end }}
+              </p>
+
+              {{ with .Params.tags }}
+                <ul class="mt-4 flex flex-wrap gap-2">
+                  {{ range . }}
+                    <li class="text-xs rounded-full bg-gray-100 px-2.5 py-1 text-gray-700">
+                      #{{ . }}
+                    </li>
+                  {{ end }}
+                </ul>
+              {{ end }}
+
+              <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-green-600 group-hover:gap-2">
+                Read more
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true">
+                  <path d="M13.5 5.5L20 12l-6.5 6.5-1.4-1.4 4.1-4.1H4v-2h12.2l-4.1-4.1 1.4-1.4z"/>
+                </svg>
+              </span>
+            </div>
+          </a>
+        </article>
+      {{ end }}
+    </div>
+  {{ else }}
+    <div class="mt-10 rounded-xl border bg-white p-6 text-gray-600">
+      No posts yet. Add markdown files under <code>/content/{{ .Section }}</code> to get started.
+    </div>
+  {{ end }}
+
+  <!-- Pagination -->
+  <div class="mt-10">
+    {{ partial "pagination.html" . }}
+  </div>
+
+  <!-- Optional RSS link if enabled -->
+  {{ with .OutputFormats.Get "RSS" }}
+    <div class="mt-4">
+      <a href="{{ .RelPermalink }}" class="text-sm text-gray-500 hover:underline">Subscribe via RSS</a>
+    </div>
+  {{ end }}
+</section>
+{{ end }}
