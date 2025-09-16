@@ -1,25 +1,42 @@
 {{/* layouts/partials/features.html
-     Compatible with:
-     1) {{ partial "features.html" . }}  -> uses .Params.features or .Params.benefits
-     2) {{ partial "features.html" (dict "title" "Benefits" "items" .Params.benefits) }}
+     Usage A (Page context): {{ partial "features.html" . }}
+       - Reads from .Params.features_heading, .Params.features (or .Params.benefits)
+     Usage B (Dict context): {{ partial "features.html" (dict "title" "Benefits" "items" (slice "One" "Two")) }}
+       - Reads from .title, .items (or optional keys "features"/"benefits")
 */}}
 
-{{- /* Resolve title */ -}}
 {{- $title := "Highlights" -}}
-{{- if isset . "title" -}}
-  {{- $title = index . "title" -}}
-{{- else if .Params.features_heading -}}
-  {{- $title = .Params.features_heading -}}
-{{- end -}}
-
-{{- /* Resolve items */ -}}
 {{- $items := slice -}}
-{{- if isset . "items" -}}
-  {{- $items = index . "items" -}}
-{{- else if .Params.features -}}
-  {{- $items = .Params.features -}}
-{{- else if .Params.benefits -}}
-  {{- $items = .Params.benefits -}}
+
+{{- /* If we're given a Page (has .Site), prefer .Params */ -}}
+{{- if .Site -}}
+  {{- with .Params.features_heading -}}
+    {{- $title = . -}}
+  {{- end -}}
+  {{- with .Params.features -}}
+    {{- $items = . -}}
+  {{- else -}}
+    {{- with .Params.benefits -}}
+      {{- $items = . -}}
+    {{- end -}}
+  {{- end -}}
+
+{{- /* Otherwise, assume we're given a dict/map with optional keys */ -}}
+{{- else -}}
+  {{- with .title -}}
+    {{- $title = . -}}
+  {{- end -}}
+  {{- with .items -}}
+    {{- $items = . -}}
+  {{- else -}}
+    {{- with (index . "features") -}}
+      {{- $items = . -}}
+    {{- else -}}
+      {{- with (index . "benefits") -}}
+        {{- $items = . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
 
 {{- if gt (len $items) 0 -}}
